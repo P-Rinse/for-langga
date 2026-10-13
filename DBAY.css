@@ -1,0 +1,268 @@
+:root {
+    --bg-gradient: linear-gradient(135deg, #ffe5ec 0%, #ffc2d1 100%);
+    --primary-color: #ff477e;
+    --secondary-color: #ff7096;
+    --accent-color: #ff0a54;
+    --text-color: #4a4a4a;
+    --rose-color: #ff2a6d;
+    --leaf-color: #4caf50;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg-gradient);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+    perspective: 1000px;
+}
+
+.hearts-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.floating-heart {
+    position: absolute;
+    bottom: -20px;
+    background-color: var(--secondary-color);
+    display: inline-block;
+    height: 20px;
+    margin: 0 10px;
+    transform: rotate(-45deg);
+    width: 20px;
+    opacity: 0.6;
+    animation: floatUp 6s linear infinite;
+}
+
+.floating-heart:before, .floating-heart:after {
+    content: "";
+    background-color: var(--secondary-color);
+    border-radius: 50%;
+    height: 20px;
+    position: absolute;
+    width: 20px;
+}
+
+.floating-heart:before { top: -10px; left: 0; }
+.floating-heart:after { left: 10px; top: 0; }
+
+@keyframes floatUp {
+    0% { transform: translateY(0) rotate(-45deg); opacity: 0.8; }
+    100% { transform: translateY(-100vh) rotate(-45deg); opacity: 0; }
+}
+
+.wrapper {
+    z-index: 10;
+    text-align: center;
+    width: 90%;
+    max-width: 450px;
+    margin: 20px auto;
+}
+
+#gift-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: all 0.8s ease;
+}
+
+h1 {
+    color: var(--accent-color);
+    margin-bottom: 30px;
+    font-size: 2.2rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    animation: pulse 2s infinite;
+}
+
+.instruction {
+    color: var(--text-color);
+    font-size: 1.1rem;
+    margin-top: 20px;
+    font-weight: 500;
+}
+
+.gift-box {
+    width: 150px;
+    height: 150px;
+    background: var(--primary-color);
+    position: relative;
+    cursor: pointer;
+    border-radius: 10px;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+    transform-style: preserve-3d;
+    transition: transform 0.3s;
+}
+
+.gift-box:hover {
+    transform: scale(1.05);
+}
+
+.gift-box::before {
+    content: '';
+    position: absolute;
+    width: 30px;
+    height: 100%;
+    background: #fff;
+    left: 60px;
+    top: 0;
+}
+
+.gift-box::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 30px;
+    background: #fff;
+    top: 60px;
+    left: 0;
+}
+
+.lid {
+    width: 160px;
+    height: 40px;
+    background: var(--accent-color);
+    position: absolute;
+    top: -20px;
+    left: -5px;
+    border-radius: 5px;
+    z-index: 2;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+    transition: transform 0.5s ease;
+}
+
+.lid::before {
+    content: '';
+    position: absolute;
+    width: 30px;
+    height: 100%;
+    background: #fff;
+    left: 65px;
+}
+
+#card-screen {
+    display: none;
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
+.card {
+    background: white;
+    padding: 35px 25px;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    border: 2px solid #fff;
+    max-height: 85vh;
+    overflow-y: auto;
+}
+
+.card h2 {
+    color: var(--accent-color);
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+}
+
+/* Bouquet & Flowers Container */
+.bouquet-container {
+    width: 100%;
+    height: 140px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.rose-wrapper {
+    position: absolute;
+    bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.rose-wrapper:nth-child(1) { transform: translateX(-45px) rotate(-15deg); }
+.rose-wrapper:nth-child(2) { transform: translateX(-20px) translateY(-10px) rotate(-5deg); z-index: 2; }
+.rose-wrapper:nth-child(3) { transform: translateX(0px) translateY(-18px); z-index: 3; }
+.rose-wrapper:nth-child(4) { transform: translateX(20px) translateY(-10px) rotate(5deg); z-index: 2; }
+.rose-wrapper:nth-child(5) { transform: translateX(45px) rotate(15deg); }
+
+.rose-head {
+    width: 34px;
+    height: 34px;
+    background: var(--rose-color);
+    border-radius: 50%;
+    position: relative;
+    box-shadow: inset 0 0 8px rgba(0,0,0,0.2);
+    animation: grow 1.5s ease forward;
+}
+
+.rose-petal {
+    position: absolute;
+    background: var(--rose-color);
+    border-radius: 50%;
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+.rose-petal:nth-child(1) { width: 26px; height: 26px; left: 4px; top: 4px; filter: brightness(1.05); }
+.rose-petal:nth-child(2) { width: 20px; height: 20px; left: 7px; top: 7px; filter: brightness(0.95); }
+.rose-petal:nth-child(3) { width: 12px; height: 12px; left: 11px; top: 11px; filter: brightness(0.85); border-radius: 50% 50% 0 0; }
+
+.rose-stem {
+    width: 3px;
+    height: 70px;
+    background: var(--leaf-color);
+    position: relative;
+}
+
+.rose-leaf {
+    position: absolute;
+    width: 12px;
+    height: 8px;
+    background: var(--leaf-color);
+    border-radius: 50% 0 50% 0;
+}
+
+.rose-leaf.left { left: -11px; top: 20px; transform: rotate(-25deg); }
+.rose-leaf.right { right: -11px; top: 35px; transform: rotate(65deg); }
+
+@keyframes grow {
+    0% { transform: scale(0); }
+    100% { transform: scale(1); }
+}
+
+.message {
+    color: var(--text-color);
+    font-size: 1.05rem;
+    line-height: 1.7;
+    text-align: left;
+    margin-bottom: 25px;
+}
+
+.signature {
+    text-align: right;
+    font-style: italic;
+    font-weight: bold;
+    color: var(--primary-color);
+    font-size: 1.2rem;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.03); }
+    100% { transform: scale(1); }
+}
